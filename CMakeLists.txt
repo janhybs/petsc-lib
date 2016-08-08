@@ -3,10 +3,15 @@ cmake_minimum_required(VERSION 2.6)
 project(PETSC CXX C Fortran)
 find_program (MAKE_EXECUTABLE NAMES make gmake)
 
+set(PETSC_VERSION_MAJOR "3")
+set(PETSC_VERSION_MINOR "6")
+set(PETSC_VERSION_PATCH "1")
+set(PETSC_VERSION "${PETSC_VERSION_MAJOR}.${PETSC_VERSION_MINOR}.${PETSC_VERSION_PATCH}")
+
 # default variables
 SET(BUILD_TYPE        "debug")
 SET(PETSC_INSTALL_DIR "${CMAKE_BINARY_DIR}")
-SET(PETSC_INSTALL_URL "http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.6.1.tar.gz")
+SET(PETSC_INSTALL_URL "http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-${PETSC_VERSION}.tar.gz")
 
 
 # setup external project with target petsc-lib
@@ -32,12 +37,12 @@ execute_process(COMMAND
 
 # add install rule, for now we copy everything in src dir
 install(
-	DIRECTORY ${PETSC_INSTALL_DIR}/src
-	DESTINATION petsc-lib/
+	DIRECTORY ${PETSC_INSTALL_DIR}/src/
+	DESTINATION lib/petsc
 )
     
 # CPack configuration 
-SET(CPACK_PACKAGE_FILE_NAME "YAML_CPP_${YAML_CPP_VERSION}")
+SET(CPACK_PACKAGE_FILE_NAME "PETSC_${PETSC_VERSION}")
 SET(CPACK_GENERATOR "DEB;TGZ;ZIP")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Jan Hybs") #required
 INCLUDE(CPack)
