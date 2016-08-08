@@ -16,6 +16,11 @@ build: cmake
 
 package:
 	cd $(BUILD_TREE) && make package	
+	# copy out packages
+	
+	cp $(BUILD_TREE)/PETSC_3.6.1.deb 	/var/www/html/packages/PETSC_3.6.1.deb
+	cp $(BUILD_TREE)/PETSC_3.6.1.tar.gz /var/www/html/packages/PETSC_3.6.1.tar.gz
+	cp $(BUILD_TREE)/PETSC_3.6.1.zip 	/var/www/html/packages/PETSC_3.6.1.zip
 .PHONY : package
 
 
